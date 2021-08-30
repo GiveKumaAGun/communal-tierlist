@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const _ = require("underscore")
+
 app.use(express.urlencoded());
 
 
@@ -21,15 +23,15 @@ app.get('/', async (req, res) => {
 
 app.post('/rankings/:topic', async (req, res) => {
   console.log(req.body.user)
-  let [ratings] = await database('sandwich').select('*').from(req.params.topic).where('user', req.body.user)
+  let [ratings] = await database(req.params.topic).select('*').from(req.params.topic).where('user', req.body.user)
   console.log(ratings)
   if (!ratings) {
     let id = await database(req.params.topic).returning('id').insert(req.body)
     console.log(id)
-    res.redirect(`/rankings/${req.params.topic}/${id.toString()}`)
-  } 
-  
-  res.redirect(`/rankings/${req.params.topic}/${ratings.id}`)
+    res.redirect(303, `/rankings/${req.params.topic}/${id.toString()}`)
+  } else {
+    res.redirect(`/rankings/${req.params.topic}/${ratings.id}`)
+  }
 })
 
 app.get('/rankings/:topic', async (req, res) => {
@@ -48,11 +50,14 @@ app.get('/rankings/:topic/:ratingId', async (req, res) => {
 })
 
 app.patch('/rankings/:topic/:ratingId', async (req, res) => {
-  let [ratings] = await database(req.params.topic).select('*').from(req.params.topic).where('id', req.params.ratingId)
-
+  // let object = _.omit(req.body, ['topic', 'ratingId'])
+  await database(req.params.topic).where('id', req.params.ratingId).update(req.body)
+  res.redirect( 303, `/rankings/${req.params.topic}`)
 })
 
 app.delete('/rankings/:topic/:ratingId', async (req, res) => {
+  await database(req.params.topic).where('id', req.params.ratingId).del();
+  res.redirect( 303, `/`)
 
 })
 
