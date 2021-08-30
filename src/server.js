@@ -22,13 +22,18 @@ app.get('/', async (req, res) => {
 app.post('/rankings/:topic', async (req, res) => {
   console.log('test')
   console.log(req.body)
+
+  //Write the logic for saving to bdatabase
+  database('sandwich').insert({BaconEggCheese: 5})
+
+
   res.sendFile(__dirname + '/tierlist.html')
 })
 
 app.get('/rankings/:topic', async (req, res) => {
   //INCOMPLETE. GEt AVERAGE SCOreS
 
-  let average = await database('rankings').select('*').from(req.params.topic).then(rows => rows)
+  let average = await database('sandwich').select('*').from(req.params.topic)
     console.log(average)
     res.sendFile(__dirname + '/tierlist.html')
   })
