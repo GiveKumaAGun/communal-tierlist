@@ -21,10 +21,13 @@ app.get('/', async (req, res) => {
 
 app.post('/rankings/:topic', async (req, res) => {
   console.log('test')
-  console.log(req.body)
+  const object = req.body
+  console.log(object)
 
   //Write the logic for saving to bdatabase
-  database('sandwich').insert({BaconEggCheese: 5})
+  await database('sandwich').insert(req.body).then(function (rows) {
+    console.log(rows);
+  })
 
 
   res.sendFile(__dirname + '/tierlist.html')
@@ -33,8 +36,8 @@ app.post('/rankings/:topic', async (req, res) => {
 app.get('/rankings/:topic', async (req, res) => {
   //INCOMPLETE. GEt AVERAGE SCOreS
 
-  let average = await database('sandwich').select('*').from(req.params.topic)
-    console.log(average)
+  // let average = await database('sandwich').select('*').from(req.params.topic)
+  //   console.log(average)
     res.sendFile(__dirname + '/tierlist.html')
   })
 

@@ -3,7 +3,7 @@ exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('sandwich').del()
     .then(function () {
-      // Inserts seed entries
+  //     // Inserts seed entries
       return knex('sandwich').insert([
         {
           BaconEggCheese: 10,
