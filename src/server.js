@@ -20,21 +20,20 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/rankings/:topic', async (req, res) => {
-  console.log('test')
-  const object = req.body
-  console.log(object)
-
-  //Write the logic for saving to bdatabase
-  await database('sandwich').insert(req.body).then(function (rows) {
-    console.log(rows);
-  })
-
-
-  res.sendFile(__dirname + '/tierlist.html')
+  console.log(req.body.user)
+  let [ratings] = await database('sandwich').select('*').from(req.params.topic).where('user', req.body.user)
+  console.log(ratings)
+  if (!ratings) {
+    let id = await database(req.params.topic).returning('id').insert(req.body)
+    console.log(id)
+    res.redirect(`/rankings/${req.params.topic}/${id.toString()}`)
+  } 
+  
+  res.redirect(`/rankings/${req.params.topic}/${ratings.id}`)
 })
 
 app.get('/rankings/:topic', async (req, res) => {
-  //INCOMPLETE. GEt AVERAGE SCOreS
+  //TO DO: Get the average of the scores and present them
 
   // let average = await database('sandwich').select('*').from(req.params.topic)
   //   console.log(average)
@@ -42,10 +41,14 @@ app.get('/rankings/:topic', async (req, res) => {
   })
 
 app.get('/rankings/:topic/:ratingId', async (req, res) => {
-  let ratings = await database('rankings').select('*').from(req.params.topic).where('id', req.params.ratingId).then(rows => rows)
+  let [ratings] = await database(req.params.topic).select('*').from(req.params.topic).where('id', req.params.ratingId)
+  console.log(ratings)
+  res.sendFile(__dirname + '/tierlist.html')
+
 })
 
 app.patch('/rankings/:topic/:ratingId', async (req, res) => {
+  let [ratings] = await database(req.params.topic).select('*').from(req.params.topic).where('id', req.params.ratingId)
 
 })
 
