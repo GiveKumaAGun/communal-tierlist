@@ -1,11 +1,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Sandwich Ranking API</title>
+  <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
   <h1>Landing Page</h1>
+  <h2>Rate the sandwiches from 1 - 10</h2>
+  <form action="/rankings/sandwich/" method="POST">
+    <label for="BaconEggCheese">Bacon, Egg, & Cheese</label>
+    <input id="" type="number" name="BaconEggCheese" id="BaconEggCheese" min="0" max="10" value="0">
+    <label for="GrilledCheese">Grilled Cheese</label>
+    <input type="number" name="GrilledCheese" id="GrilledCheese" min="0" max="10" value="0">
+    <label for="PulledPork">Pulled Pork</label>
+    <input type="number" name="PulledPork" id="PulledPork" min="0" max="10" value="0">
+    <label for="BLT">BLT</label>
+    <input type="number" name="BLT" id="BLT" min="0" max="10" value="0">
+    <label for="TunaMelt">Tuna Melt</label>
+    <input type="number" name="TunaMelt" id="TunaMelt" min="0" max="10" value="0">
+    <label for="FriedChicken">Fried Chicken</label>
+    <input type="number" name="FriedChicken" id="FriedChicken" min="0" max="10" value="0">
+    <label for="Cheesesteak">Cheesesteak</label>
+    <input type="number" name="Cheesesteak" id="Cheesesteak" min="0" max="10" value="0">
+    <label for="Cubano">Cubano</label>
+    <input type="number" name="Cubano" id="Cubano" min="0" max="10" value="0">
+    <label for="Meatball Sub">Meatball Sub</label>
+    <input type="number" name="Meatball Sub" id="Meatball Sub" min="0" max="10" value="0">
+    <label for="Reuben">Reuben</label>
+    <input type="number" name="Reuben" id="Reuben" min="0" max="10" value="0">
+    <label for="Caprese">Caprese</label>
+    <input type="number" name="Caprese" id="Caprese" min="0" max="10" value="0">
+    <label for="PattyMelt">Patty Melt</label>
+    <input type="number" name="PattyMelt" id="PattyMelt" min="0" max="10" value="0">
+    <label for="PBJ">PB & J</label>
+    <input type="number" name="PBJ" id="PBJ" min="0" max="10" value="0">
+    <label for="RoastBeef">Roast Beef</label>
+    <input type="number" name="RoastBeef" id="RoastBeef" min="0" max="10" value="0">
+    <label for="Tonkatsu">Tonkatsu</label>
+    <input type="number" name="Tonkatsu" id="Tonkatsu" min="0" max="10" value="0">
+    <label for="HamCheese">Ham & Cheese</label>
+    <input type="number" name="HamCheese" id="HamCheese" min="0" max="10" value="0">
+    <label for="Bologna">Bologna</label>
+    <input type="number" name="Bologna" id="Bologna" min="0" max="10" value="0">
+    <input type="submit" value="Submit Ratings">
+  </form>
 </body>
 </html>

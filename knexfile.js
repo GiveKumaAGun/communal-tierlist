@@ -1,50 +1,37 @@
-// Update with your config settings.
-
 module.exports = {
-
   development: {
     client: 'pg',
-    connection: {
-      host: '127.0.0.1',
-      user: 'postgres',
-      password: 'reiji2924',
-      database: 'reviews'
-    },
+    connection:'postgres://postgres:reiji2924@localhost/rankings',
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: './db/migrations'
+    },
+    seeds: {
+      directory: './db/seeds/dev'
+    },
+    useNullAsDefault: true
   },
 
-  staging: {
+  test: {
     client: 'pg',
-    connection: {
-      user: process.env.DB_USER,
-      password: process.env.DB_PW,
-      database: process.env.DB_NAME
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection:'postgres://postgres:reiji2924@localhost/rankings',
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: './db/migrations'
+    },
+    seeds: {
+      directory: './db/seeds/test'
+    },
+    useNullAsDefault: true
   },
 
   production: {
     client: 'pg',
-    connection: {
-      user: process.env.DB_USER,
-      password: process.env.DB_PW,
-      database: process.env.DB_NAME
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    connection: process.env.DATABASE_URL,
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: './db/migrations'
+    },
+    seeds: {
+      directory: './db/seeds/production'
+    },
+    useNullAsDefault: true
   }
-
-};
+}
